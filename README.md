@@ -31,10 +31,18 @@ Participants must bring their own laptop. Prior to the start of the workshop ple
 ### Agenda
 (Subject to change.)
 
-#### Wednesday, March 18, 2026  
+#### Wednesday, March 18  
 | Time | Topic |  
 | ----------------- | ------------------------ |  
-| 9:30am - 10:00am | Introductions |  
-| 10:00am - 10:30am | Intro to Best Practices |  
-| 10:30 - 11:00am | Intro to RStudio and setting up projects |  
-| 11:00am - 11:10am | *Break* |  
+| 9:30a - 10:00a | Introductions |  
+| 10:00a - 10:30a | Intro to Best Practices |  
+| 10:30a - 11:00a | Intro to RStudio and setting up projects |  
+| 11:00a - 11:10a | *Break* |  
+| 11:10a - 12:30p | A litte bit of unix, intro to version control, and git |  
+| 12:30p - 1:30p | *Lunch* |
+| 1:30p - 2:15p | git practice session |
+| 2:15p - 3:00p | Intro to data types and structures in R |
+| 3:00p - 3:10p | *Break* |
+| 3:10p - 4:30p | Transforming data: import, view, filter |
+
+#### Thursday, March 19
