@@ -27,3 +27,14 @@ Participants must bring their own laptop. Prior to the start of the workshop ple
 - [R for Data Science](https://r4ds.hadley.nz/) (2nd edition)
 - [Software Carpentry workshop lessons](https://software-carpentry.org/lessons/)
 - [UBC Stat 545](stat545.com) by Jenny Bryan at UBC
+
+### Agenda
+(Subject to change.)
+
+#### Wednesday, March 18, 2026  
+| Time | Topic |  
+| ----------------- | ------------------------ |  
+| 9:30am - 10:00am | Introductions |  
+| 10:00am - 10:30am | Intro to Best Practices |  
+| 10:30 - 11:00am | Intro to RStudio and setting up projects |  
+| 11:00am - 11:10am | *Break* |  
