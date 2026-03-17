@@ -21,6 +21,28 @@ $endif$
   </style>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
     href="$slidy-url$/styles/slidy.css" />
+  <style>
+    div.slide {
+      .path-header {
+        margin-top: 1rem;
+        background-color: #E5E6E7;
+      }
+      h1 {
+        padding-top: 1rem;
+      }
+      p {
+        padding-left: 0.5rem;
+      }
+      ul {
+        padding-left: 2rem;
+      }
+      blockquote {
+        background-color: #E5E6E7;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+  </style>
 $for(css)$
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="$css$" />
@@ -37,7 +59,7 @@ $if(duration)$
   <meta name="duration" content="$duration$" />
 $endif$
 </head>
-<body>
+<body id="main">
 $for(include-before)$
 $include-before$
 $endfor$
@@ -71,5 +93,35 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
+<script>
+  const PATH_SEP = "PATH_SEP";
+  let slidePath, slideLevel = ["", 0];
+  Array.from(document.getElementsByClassName("slide")).forEach((slideEle) => {
+    const nextSlideLevel = Array.from(slideEle.classList).find((className) => className.startsWith("level"));
+    if (nextSlideLevel !== undefined) {
+      const nextSlideLevelInt = parseInt(nextSlideLevel.slice(5));
+      const slideTitle = Array.from(slideEle.children)[0].innerHTML;
+      if (nextSlideLevelInt === 1) {
+        slidePath = slideTitle;
+      } else if (nextSlideLevelInt > slideLevel) {
+        slidePath = slidePath.concat(" ", PATH_SEP, " ", slideTitle);
+      } else if (nextSlideLevelInt <= slideLevel){
+        let levelDiff = slideLevel - nextSlideLevelInt;
+        while (levelDiff >= 0) {
+          slidePath = slidePath.slice(0, slidePath.lastIndexOf(PATH_SEP));
+          levelDiff = levelDiff - 1;
+        };
+        slidePath = slidePath.concat(PATH_SEP, " ", slideTitle);
+      };
+      slideLevel = nextSlideLevelInt;
+      if (slideLevel > 1) {
+        const slidePathEle = document.createElement("div");
+        slidePathEle.classList.add("path-header");
+        slidePathEle.innerHTML = slidePath.slice(0, slidePath.lastIndexOf(PATH_SEP) + 8).replaceAll(PATH_SEP, "/");
+        slideEle.prepend(slidePathEle);
+      };
+    };
+  });
+</script>
 </body>
 </html>

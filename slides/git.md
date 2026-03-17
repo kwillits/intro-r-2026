@@ -86,12 +86,26 @@ There are other `git` cloud providers out there that are less ... vertically-int
 
 These platforms often have [instructions](https://docs.gitlab.com/user/project/import/github/) for [moving your code over](https://docs.codeberg.org/advanced/migrating-repos/) from GitHub.
 
+# Demonstration
+
+## Workflow 1
+
+## Workflow 2
+
+## Merge conflicts
+
 # Appendices
 
 ## Glossary
 
 * Open source
 * Linux
+
+## Further reading
+
+[Common `git` patterns/workflows](https://happygitwithr.com/workflows-intro)
+[Exporting R Markdown files for GitHub](https://rmarkdown.rstudio.com/github_document_format.html)
+[Rendering Quarto files with GitHub Pages](https://quarto.org/docs/publishing/github-pages.html)
 
 ## How can I turn this Markdown file into an HTML slideshow?
 
@@ -101,7 +115,7 @@ Once you have `pandoc`, run the following `bash` commands from the root of the r
 
 ```bash
 mkdir -p slides/output
-pandoc -t slidy --template slides/template.html --css slides/styles.css --embed-resources --standalone -o slides/output/git.html slides/git.md
+pandoc -t slidy --template slides/template.html --slide-level=3 --embed-resources --standalone -o slides/output/git.html slides/git.md
 ```
 
 You can then [view the HTML file in a web browser](https://www.geeksforgeeks.org/html/how-to-access-an-html-document-in-a-browser/).
