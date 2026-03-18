@@ -1,0 +1,26 @@
+---
+title: "R training"
+author: "Karissa Willits"
+date: 2026-03-18 
+format: html
+editor: visual
+---
+
+I am learning R! Don't need # when using chunks
+
+```{r}
+#use # when leaving notes in the code
+# i dont know what ``` is for
+#ctr enter just runs that line of code.
+```
+
+
+```{r}
+3 #this will get just printed
+4
+typeof(8.5) #this is returning a function . returns the data type
+#console important for tracking what happened. trying ot troubleshoot, look in the console. most of code writing want to be within a code file so its saved. 
+```
+```{r}
+"text strings are fun"
+```
