@@ -6,6 +6,11 @@ format: html
 editor: visual
 ---
 
+```{r}
+source("training_source.R")
+```
+
+
 I am learning R! Don't need # when using chunks
 
 ```{r}
@@ -23,4 +28,32 @@ typeof(8.5) #this is returning a function . returns the data type
 ```
 ```{r}
 "text strings are fun"
+typeof("strings ")
 ```
+```{r}
+TRUE
+FALSE
+typeof(TRUE)
+```
+
+```{r}
+a <- c(1, 2, 3) #assign this as a
+a
+c("a", "b", "c")
+c(TRUE, FALSE)
+c(1, "two", 3)
+#only returned characters. "" means it interpreted it as a character. Characters are always in quotes
+#vector is one cell in Excel that has 1,2,3,4 all in the same cell. 
+
+
+```
+
+##lists (can hold mixed types)
+
+```{r}
+csv_path <- "../data/raw/presurvey_20260317.csv"
+survey_raw <- rio ::import(csv_path) ##use rio :: to make sure it uses Rio when importing. 
+
+```
+
+
