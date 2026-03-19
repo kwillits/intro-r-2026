@@ -96,7 +96,7 @@ survey2 <- survey |>
         distance_digits = str_extract(distance, "[0-9]\\.+"),
         commute_min = as.numeric(commute_digits),
         distance_mi = as.numeric(distance_digits),
-        travel_mph = if_else(!is.na(commute_min) & commute_min > 0,
+        travel_mph = if_else(!is.na(commute_min) & commute_min > 0, 
                              distance_mi / commute_min * 60, NA_real_),
                                       
 os = str_to_lower(os),
@@ -120,5 +120,27 @@ head(survey3)
 
 ```{r}
 
+long_survey <- survey2 |>
+  select(distance, commute_time) |> 
+  pivot_longer(cols = c(distance, commute_time), names_to = "num_text_var", 
+               values_to = "numeric_text") |>  
+  mutate(numeric_text = str_to_lower(numeric_text), 
+   .rid = row_number()) 
+
+  wide_survey <- long_survey |> 
+    pivot_wider(
+  id_cols = .rid,
+  names_from = num_text_var,
+  values_from = numeric_text, 
+  names_repair = "minimal") |> 
+  select(-.rid)
 ```
+
+
+
+
+
+
+
+
 
