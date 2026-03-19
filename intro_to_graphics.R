@@ -48,5 +48,8 @@ speed_det_fig3
 
 #added in plotly library above
 
-det_speed_figly <- ggplotly(speed_det_fig3) #run the object drom above thru ggplotly
+det_speed_figly <- ggplotly(speed_det_fig3) #run the object from above thru ggplotly
 det_speed_figly
+
+
+

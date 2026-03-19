@@ -10,8 +10,7 @@ editor: visual
 source("training_source.R")
 ```
 
-
-I am learning R! Don't need # when using chunks
+I am learning R! Don't need \# when using chunks
 
 ```{r}
 #use # when leaving notes in the code
@@ -19,17 +18,18 @@ I am learning R! Don't need # when using chunks
 #ctr enter just runs that line of code.
 ```
 
-
 ```{r}
 3 #this will get just printed
 4
 typeof(8.5) #this is returning a function . returns the data type
 #console important for tracking what happened. trying ot troubleshoot, look in the console. most of code writing want to be within a code file so its saved. 
 ```
+
 ```{r}
 "text strings are fun"
 typeof("strings ")
 ```
+
 ```{r}
 TRUE
 FALSE
@@ -52,8 +52,73 @@ c(1, "two", 3)
 
 ```{r}
 csv_path <- "../data/raw/presurvey_20260317.csv"
-survey_raw <- rio ::import(csv_path) ##use rio :: to make sure it uses Rio when importing. 
+survey_raw <- rio ::import(csv_path)  
 
 ```
 
+```{r}
+rm(survey_raw)
+gc()
+
+```
+
+
+```{r}
+survey_raw |>
+glimpse()
+
+survey <- survey_raw |>
+clean_names() |>
+rename(
+os = what_operating_system_are_you_using_for_this_workshop,
+prior_exp = which_of_the_following_are_true_regarding_your_experiences_with_r_prior_to_this_workshop,
+r_hope = what_do_you_hope_to_use_r_for_in_the_future,
+travel_mode = the_workshop_will_be_held_on_the_psu_campus_what_is_your_intended_mode_of_travel_to_the_workshop_check_all_that_apply,
+travel_direct = do_you_intend_to_travel_directly_from_home_to_the_workshop,
+distance = how_far_will_you_likely_travel,
+commute_time = what_is_the_approximate_travel_time_for_your_morning_commute_to_psu,
+drink = what_is_your_morning_drink_of_choice,
+movie_quote = what_is_the_first_movie_quote_that_comes_to_mind,
+pineapple_ok = pineapple_is_an_acceptable_pizza_topping
+)
+
+glimpse(survey)
+```
+
+```{r}
+
+linux <- c("linux", "ubuntu", "debian", "fedora", "arch")
+
+paste(linux, collapse = "|")
+
+survey2 <- survey |> 
+  mutate(commute_digits = str_extract(commute_time, "[0-9]+"),
+        distance_digits = str_extract(distance, "[0-9]\\.+"),
+        commute_min = as.numeric(commute_digits),
+        distance_mi = as.numeric(distance_digits),
+        travel_mph = if_else(!is.na(commute_min) & commute_min > 0,
+                             distance_mi / commute_min * 60, NA_real_),
+                                      
+os = str_to_lower(os),
+os_family = case_when(str_detect(os, "win") ~ "Windows", 
+                      str_detect(os, "mac|apple") ~ "Mac",
+                      str_detect(os, paste(linux, collapse = "|")) ~ "Linux",
+                      TRUE ~ "Other"
+                      )
+                      )
+
+
+glimpse(survey2)
+
+
+survey3 <- survey2 |> 
+  select(os, os_family, distance_mi, commute_min, travel_mph)
+
+head(survey3)
+
+```
+
+```{r}
+
+```
 
