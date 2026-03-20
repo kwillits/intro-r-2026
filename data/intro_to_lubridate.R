@@ -71,7 +71,37 @@ starttime_seq <- seq(
   as.data.frame()
  colnames(starttime_seq) <- c("starttime")
   
-    
+ #functions. inside the () will be the variable you want to put the variable in. X and y as example
+# {everything you want the function to do }
+ figure_function <- function (stid, measure){
+   sta_1059 <- stations_df |> 
+     filter(stationid == stid) |> 
+     right_join(starttime_seq, by = "starttime") |> 
+     ggplot(aes(x = starttime, y = {{measure}})) + ##have to put {{}} around measure
+     geom_line(color = "skyblue") +
+     geom_point(color = "darkblue", size = 0.5) + 
+     scale_x_datetime(
+       date_breaks = "1 day",
+       date_labels = "%Y-%m-%d",
+       guide = guide_axis(angle = 45)
+     ) +
+     xlab(NULL) +
+     theme_bw()
+     
+   sta_1059
+  }
   
-  
+ figure_function(3142, mean_speed)
+ 
+ source("figure_function.R")
+ figure_function(10755, mean_occ)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   
