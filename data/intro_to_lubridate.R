@@ -2,12 +2,12 @@
 library(tidyr)
 library(dplyr)
 library(lubridate) #handles date/time/timezone stuff. OlsonNames shows you all available timezones
-
+library(ggplot2)
 #can also do
 #library(tidyr,
 #dplyr,
 #lubridate
-)
+#)
 
 clean_df <- readRDS("data/clean_data.rds")
 raw_detectors <- read.csv("data/raw/detectors.csv", stringsAsFactors = F) #lots of issues with time series if don't do StringsAsFactors
@@ -41,18 +41,35 @@ stations_df <- clean_df |>
   as.data.frame() #to keep it as a dataframe
 
 #check structure of station_df
-str(station_df)
+str(stations_df)
   
-#graph it
+#graph it. adding features to graph so use + 
+#order of adding geom_line and geom_point matters. line first, then point
 sta_1059 <- stations_df |> 
   filter(stationid == 1059) |> 
+  right_join(starttime_seq, by = "starttime") |> 
   ggplot(aes(x = starttime, y = tot_volume)) +
-  geom_line() +
-  geom_point()
+  geom_line(color = "skyblue") +
+  geom_point(color = "darkblue") + 
+  scale_x_datetime(
+    date_breaks = "1 day",
+    date_labels = "%Y-%m-%d",
+    guide = guide_axis(angle = 45)
+      ) +
+xlab(NULL) +
+theme_bw() +
+geom_hline(yintercept = mean(stations_df$tot_volume),
+           color = "pink")
 sta_1059
 
-  
-  
+#create a sequence
+starttime_seq <- seq(
+  from = ymd_hms("2026-02-01 00:00:00", tz = "US/Pacific"),
+  to = ymd_hms("2026-02-16 00:00:00", tz = "US/Pacific"),
+  by = "15 min"
+) |> 
+  as.data.frame()
+ colnames(starttime_seq) <- c("starttime")
   
     
   
